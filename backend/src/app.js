@@ -12,6 +12,7 @@ const VERSION = '/api/v1';
 
 app.use(`${VERSION}/category`, require('./routes/categoryRoute'));
 app.use(`${VERSION}/topic`, require('./routes/topicRoute'));
+app.use(`${VERSION}/question`, require('./routes/questionRoute'));
 
 app.get('*', (_, res) => {
   res.send('Word Guess API Working');

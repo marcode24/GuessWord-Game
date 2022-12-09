@@ -1,0 +1,36 @@
+const { request, response } = require('express');
+const Question = require('../models/questionModel');
+const Topic = require('../models/topicModel');
+
+const createQuestion = async (req = request, res = response) => {
+  try {
+    const { topicId } = req.params;
+    const existsTopic = await Topic.findById(topicId);
+    if (!existsTopic) {
+      return res.status(404).json({
+        ok: false,
+        msg: 'Topic not found',
+      });
+    }
+    const question = new Question({ ...req.body });
+    question.topic = topicId;
+    const savedQuestion = await question.save();
+    existsTopic.questions.push(savedQuestion._id);
+    await existsTopic.save();
+    res.status(201).json({
+      ok: true,
+      msg: 'Question created',
+      question: savedQuestion,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: 'Please contact the administrator',
+    });
+  }
+};
+
+module.exports = {
+  createQuestion,
+};
