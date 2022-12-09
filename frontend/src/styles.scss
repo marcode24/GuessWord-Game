@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+@import "settings/_typography.scss";
+@import "settings/_colors.scss";
+@import "settings/_shadows.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Raleway, Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+:root {
+  --bg: #{$bg-light};
+  --fc-ligth: #{$fc-light};
+  --fc-primary: #{$fc-primary};
+  --box-shadow-1: #{$bx-shadow-light};
+}
+
+body {
+  max-width: 200rem;
+  background-color: var(--bg);
+}

@@ -1,0 +1,111 @@
+@import "settings/_typography.scss";
+@import "settings/_media.scss";
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  max-width: 80%;
+  margin: 0 auto;
+
+  @media only screen and (max-width: 768px) {
+    max-width: 100%;
+  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1rem 0;
+
+    & .question {
+      @include fs-3;
+      @include fw-800;
+      color: var(--fc-ligth);
+      text-align: center;
+    }
+
+    & .topic {
+      @include fs-6;
+      @include fw-600;
+      color: var(--fc-primary);
+      text-align: center;
+    }
+  }
+
+  & .wordle {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex-grow: 1;
+
+    & .try {
+      display: flex;
+      gap: 0.3rem;
+      justify-content: center;
+
+      & .letter {
+        @include fs-4;
+        @include fw-600;
+        flex: 1 1;
+        align-items: center;
+        border: 2px solid #dee1e9;
+        height: 50px;
+        max-width: 50px;
+        text-transform: uppercase;
+        width: 64px;
+        border-radius: 5px;
+        color: #393e4c;
+        background: #fbfcff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include width-small {
+          @include fs-6;
+        }
+      }
+    }
+  }
+
+  & .keyboard-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.4rem;
+
+    & .keyboard-row {
+      display: flex;
+      gap: 0.4rem;
+
+      & .keyboard-key {
+        @include fs-5;
+        @include fw-800;
+        flex: 1 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45px;
+        border: 2px solid #b9b9b9;
+        border-radius: 0.5rem;
+        background-color: #fbfcff;
+        color: var(--fc-ligth);
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        text-transform: uppercase;
+
+        &.action {
+          flex: 2 1;
+        }
+
+        &:hover {
+          background-color: #b9b9b9;
+        }
+      }
+    }
+  }
+}
