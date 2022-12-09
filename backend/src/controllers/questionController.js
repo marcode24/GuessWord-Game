@@ -59,7 +59,25 @@ const getRandomQuestion = async (req = request, res = response) => {
   }
 };
 
+const getQuestionsByTopic = async (req = request, res = response) => {
+  try {
+    const { topicId } = req.params;
+    const questions = await Question.find({ topic: topicId });
+    res.status(200).json({
+      ok: true,
+      questions,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: 'Something went wrong, try again',
+    });
+  }
+};
+
 module.exports = {
   createQuestion,
   getRandomQuestion,
+  getQuestionsByTopic,
 };
