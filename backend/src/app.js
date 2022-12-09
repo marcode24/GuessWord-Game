@@ -11,6 +11,7 @@ app.use(express.json());
 const VERSION = '/api/v1';
 
 app.use(`${VERSION}/category`, require('./routes/categoryRoute'));
+app.use(`${VERSION}/topic`, require('./routes/topicRoute'));
 
 app.get('*', (_, res) => {
   res.send('Word Guess API Working');

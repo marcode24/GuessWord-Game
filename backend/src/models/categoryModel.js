@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, SchemaTypes } = require('mongoose');
 
 const categorySchema = new Schema({
   name: {
@@ -16,7 +16,7 @@ const categorySchema = new Schema({
   },
   topics: [
     {
-      type: Schema.Types.ObjectId,
+      type: SchemaTypes.ObjectId,
       ref: 'Topic',
     },
   ],

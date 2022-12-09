@@ -28,6 +28,27 @@ const create = async (req = request, res = response) => {
   }
 };
 
+const getAll = async (_, res = response) => {
+  try {
+    const categories = await Category.find(
+      {},
+      { topics: { $slice: 5 } },
+    ).populate({ path: 'topics', select: '-__V' });
+
+    return res.status(200).json({
+      ok: true,
+      categories,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: 'Something went wrong, try again',
+    });
+  }
+};
+
 module.exports = {
   create,
+  getAll,
 };
