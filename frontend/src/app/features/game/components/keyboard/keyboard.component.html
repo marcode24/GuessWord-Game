@@ -1,0 +1,38 @@
+<section class="keyboard">
+  <div class="keyboard-wrapper">
+    <div class="keyboard-row">
+      <div class="keyboard-key" (click)="emitLetter('q')">q</div>
+      <div class="keyboard-key" (click)="emitLetter('w')">w</div>
+      <div class="keyboard-key" (click)="emitLetter('e')">e</div>
+      <div class="keyboard-key" (click)="emitLetter('r')">r</div>
+      <div class="keyboard-key" (click)="emitLetter('t')">t</div>
+      <div class="keyboard-key" (click)="emitLetter('y')">y</div>
+      <div class="keyboard-key" (click)="emitLetter('u')">u</div>
+      <div class="keyboard-key" (click)="emitLetter('i')">i</div>
+      <div class="keyboard-key" (click)="emitLetter('o')">o</div>
+      <div class="keyboard-key" (click)="emitLetter('p')">p</div>
+    </div>
+    <div class="keyboard-row">
+      <div class="keyboard-key" (click)="emitLetter('a')">a</div>
+      <div class="keyboard-key" (click)="emitLetter('s')">s</div>
+      <div class="keyboard-key" (click)="emitLetter('d')">d</div>
+      <div class="keyboard-key" (click)="emitLetter('f')">f</div>
+      <div class="keyboard-key" (click)="emitLetter('g')">g</div>
+      <div class="keyboard-key" (click)="emitLetter('h')">h</div>
+      <div class="keyboard-key" (click)="emitLetter('j')">j</div>
+      <div class="keyboard-key" (click)="emitLetter('k')">k</div>
+      <div class="keyboard-key" (click)="emitLetter('l')">l</div>
+    </div>
+    <div class="keyboard-row">
+      <div class="keyboard-key action" (click)="emitBackspace()"><- </div>
+          <div class="keyboard-key" (click)="emitLetter('z')">z</div>
+          <div class="keyboard-key" (click)="emitLetter('x')">x</div>
+          <div class="keyboard-key" (click)="emitLetter('c')">c</div>
+          <div class="keyboard-key" (click)="emitLetter('v')">v</div>
+          <div class="keyboard-key" (click)="emitLetter('b')">b</div>
+          <div class="keyboard-key" (click)="emitLetter('n')">n</div>
+          <div class="keyboard-key" (click)="emitLetter('m')">m</div>
+          <div class="keyboard-key action" (click)="emitEnter()">Enter</div>
+      </div>
+    </div>
+</section>

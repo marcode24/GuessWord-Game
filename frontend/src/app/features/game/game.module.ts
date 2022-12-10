@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ComponentsModule } from './components/components.module';
+
 import { GameComponent } from './pages/game/game.component';
 
 @NgModule({
@@ -8,7 +10,8 @@ import { GameComponent } from './pages/game/game.component';
     GameComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ComponentsModule
   ]
 })
 export class GameModule { }

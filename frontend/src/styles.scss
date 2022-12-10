@@ -25,3 +25,14 @@ body {
   max-width: 200rem;
   background-color: var(--bg);
 }
+
+app-game {
+  position: relative;
+}
+
+canvas {
+  height: 100%; /* we need these for full-screen effect */
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
