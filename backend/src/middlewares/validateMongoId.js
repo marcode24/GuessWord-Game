@@ -11,6 +11,18 @@ const validateCategoryID = (req, res, next) => {
   next();
 };
 
+const validateTopicID = (req, res, next) => {
+  const { topicId } = req.params;
+  if (topicId && !isMongoId(topicId)) {
+    return res.status(400).json({
+      ok: false,
+      msg: 'Must provide a valid topic id',
+    });
+  }
+  next();
+};
+
 module.exports = {
   validateCategoryID,
+  validateTopicID,
 };
