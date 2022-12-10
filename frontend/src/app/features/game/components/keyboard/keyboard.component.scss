@@ -1,0 +1,39 @@
+@import "settings/_typography.scss";
+
+.keyboard-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.4rem;
+
+  & .keyboard-row {
+    display: flex;
+    gap: 0.4rem;
+
+    & .keyboard-key {
+      @include fs-5;
+      @include fw-800;
+      flex: 1 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 45px;
+      border: 2px solid #b9b9b9;
+      border-radius: 0.5rem;
+      background-color: #fbfcff;
+      color: var(--fc-ligth);
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      text-transform: uppercase;
+
+      &.action {
+        flex: 2 1;
+      }
+
+      &:hover {
+        background-color: #b9b9b9;
+      }
+    }
+  }
+}

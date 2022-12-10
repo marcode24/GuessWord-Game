@@ -1,0 +1,38 @@
+@import "settings/_typography.scss";
+@import "settings/_colors.scss";
+@import "settings/_shadows.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Raleway, Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+:root {
+  --bg: #{$bg-light};
+  --fc-ligth: #{$fc-light};
+  --fc-primary: #{$fc-primary};
+  --box-shadow-1: #{$bx-shadow-light};
+}
+
+body {
+  max-width: 200rem;
+  background-color: var(--bg);
+}
+
+app-game {
+  position: relative;
+}
+
+canvas {
+  height: 100%; /* we need these for full-screen effect */
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
