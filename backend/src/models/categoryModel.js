@@ -12,7 +12,7 @@ const categorySchema = new Schema({
   },
   image: {
     type: String,
-    default: 'my-default-image.jpg',
+    default: null,
   },
   topics: [
     {

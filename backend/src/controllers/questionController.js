@@ -48,7 +48,7 @@ const getRandomQuestion = async (req = request, res = response) => {
     await Question.populate(randomQuestion, { path: 'topic', select: 'name' });
     res.status(200).json({
       ok: true,
-      question: randomQuestion,
+      question: randomQuestion[0],
     });
   } catch (error) {
     console.log(error);
