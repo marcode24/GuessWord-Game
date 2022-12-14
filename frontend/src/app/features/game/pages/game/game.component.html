@@ -1,9 +1,12 @@
 <div class="wrapper">
   <div class="game-container" *ngIf="!loading">
-    <section class="top">
-      <span class="question">{{ question.question }}</span>
+    <section class="header">
+      <div class="back" routerLink="/">
+        <i class="fa fa-arrow-left"></i>
+      </div>
+      <app-toggle-theme></app-toggle-theme>
     </section>
-
+    <span class="question">{{ question.question }}</span>
     <section class="wordle">
       <div class="try">
         <div class="row" *ngFor="let answer of answers">
@@ -18,3 +21,5 @@
     <app-keyboard (letter)="editAnswer($event)" (enter)="validateAnswer($event)"></app-keyboard>
   </div>
 </div>
+
+<app-modal-status (newGame)="loadNewQuestion($event)" (resetGame)="resetGame($event)"></app-modal-status>

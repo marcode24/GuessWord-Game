@@ -7,6 +7,7 @@ import { IAnswer } from '@models/answer.model';
 import { IQuestion } from '@models/question.model';
 import { QuestionService } from '@services/question.service';
 import { SettingService } from '@services/setting.service';
+import { GameService } from '../../services/game.service';
 
 @Component({
   selector: 'app-game',
@@ -19,14 +20,15 @@ export class GameComponent implements OnInit, OnDestroy {
   currentAnswer: number = 0;
   routerSubscription: Subscription;
   loading: boolean = true;
-  triesRemaining: number = this.settingService.getMaxTries();
+  triesRemaining: number;
   constructor(
     private renderer2: Renderer2,
     private elementRef: ElementRef,
     private activatedRoute: ActivatedRoute,
     private questionService: QuestionService,
     private router: Router,
-    private readonly settingService: SettingService
+    private readonly settingService: SettingService,
+    private readonly gameService: GameService,
   ) {}
   ngOnDestroy(): void {
     this.routerSubscription.unsubscribe();
@@ -42,6 +44,9 @@ export class GameComponent implements OnInit, OnDestroy {
     this.questionService.getRandomQuestion(topicId).subscribe({
       next: (question: IQuestion) => {
         this.question = question;
+        this.answers = [];
+        this.triesRemaining = this.settingService.getMaxTries();
+        this.currentAnswer = 0;
         this.createAnswers();
       },
       complete: () =>  this.loading = false,
@@ -55,7 +60,7 @@ export class GameComponent implements OnInit, OnDestroy {
     myConfetti({ particleCount: 200, spread: 160 });
   }
 
-  validateAnswer(validate: boolean) {
+  validateAnswer(_: boolean) {
     if(
       this.answers[this.currentAnswer].letters.some(answer => answer.letter === '')
       || this.triesRemaining === 0
@@ -75,11 +80,12 @@ export class GameComponent implements OnInit, OnDestroy {
     if(this.answers[this.currentAnswer].letters.every(answer => answer.status === 'correct')) {
       this.answers[this.currentAnswer].correct = true;
       this.surprise();
+      this.gameService.openModal(true);
       return
     }
     this.triesRemaining--;
     this.currentAnswer++;
-    if(this.triesRemaining > 0) this.createAnswers();
+    this.triesRemaining > 0 ? this.createAnswers() : this.gameService.openModal(false);
   }
 
   createAnswers() {
@@ -106,4 +112,14 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
+  loadNewQuestion(_: boolean): void {
+    this.getRandomQuestion(this.question.topic._id as string);
+  }
+
+  resetGame(_?: boolean): void {
+    this.answers = [];
+    this.triesRemaining = this.settingService.getMaxTries();
+    this.currentAnswer = 0;
+    this.createAnswers();
+  }
 }

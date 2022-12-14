@@ -1,0 +1,38 @@
+@import "settings/_colors.scss";
+@import "settings/_typography.scss";
+
+@mixin btn {
+  @include fw-700;
+  @include fs-6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.8rem;
+  color: #eeeeee;
+  height: 40px;
+  transition: 0.3s;
+}
+
+@mixin btn-primary {
+  background: rgb($fc-primary, 0.8);
+  &:hover {
+    background: var(--fc-primary);
+  }
+}
+
+@mixin btn-secondary {
+  background: rgb($fc-tertiary-light, 0.8);
+  &:hover {
+    background: var(--fc-tertiary);
+  }
+}
