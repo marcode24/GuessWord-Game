@@ -16,7 +16,7 @@ app.use(`${VERSION}/category`, require('./routes/categoryRoute'));
 app.use(`${VERSION}/topic`, require('./routes/topicRoute'));
 app.use(`${VERSION}/question`, require('./routes/questionRoute'));
 
-app.get('*', (_, res) => {
+app.get('/', (_, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
