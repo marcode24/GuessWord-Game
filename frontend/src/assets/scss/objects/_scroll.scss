@@ -1,0 +1,27 @@
+@import "settings/_colors.scss";
+@import "settings/_media.scss";
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+    border-radius: 2.2rem;
+    background: transparent;
+
+    @include width-medium {
+      width: 0.3rem;
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $bg-scroll;
+    border-radius: 1.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $bg-scroll;
+  }
+}

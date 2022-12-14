@@ -1,9 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
-import { IAnswer } from '@models/answer.model';
-import { IQuestion } from '@models/question.model';
-import { IResult } from '@models/result.model';
-
 @Injectable({
   providedIn: 'root'
 })

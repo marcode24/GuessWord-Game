@@ -5,7 +5,7 @@ import { GameComponent } from "./pages/game/game.component";
 
 const childRoutes: Routes = [
   {
-    path: '',
+    path: 'play/:topicId',
     component: GameComponent,
   },
 ];

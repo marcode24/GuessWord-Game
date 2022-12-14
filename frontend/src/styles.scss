@@ -1,6 +1,8 @@
 @import "settings/_typography.scss";
 @import "settings/_colors.scss";
 @import "settings/_shadows.scss";
+@import "settings/_media.scss";
+@import "elements/_input.scss";
 
 * {
   margin: 0;
@@ -19,11 +21,40 @@
   --fc-ligth: #{$fc-light};
   --fc-primary: #{$fc-primary};
   --box-shadow-1: #{$bx-shadow-light};
+  --bg-header: #{$bg-header-light};
+  --bg-modal: #{$bg-modal-light};
+  --bg-letter: #{$bg-letter-light};
+  --border-letter: #{$border-letter-light};
+  --fc-letter: #{$fc-letter-light};
+  --bg-hover-key: #{$bg-hover-key-light};
+  --fc-secondary: #{$fc-secondary-light};
+  --bg-secondary: #{$bg-secondary-light};
+  --fc-tertiary: #{$fc-tertiary-light};
 }
 
 body {
   max-width: 200rem;
   background-color: var(--bg);
+}
+
+body.dark {
+  --bg: #{$bg-dark};
+  --fc-light: #{$fc-dark};
+  --fc-dark: #{$fc-light};
+  --fc-secondary: #{$fc-secondary-dark};
+  --fc-tertiary: #{$fc-tertiary-dark};
+  --bg-header: #{$bg-header-dark};
+  --bg-modal: #{$bg-modal-dark};
+  --bg-letter: #{$bg-letter-dark};
+  --border-letter: #{$border-letter-dark};
+  --fc-letter: #{$fc-letter-dark};
+  --bg-hover-key: #{$bg-hover-key-dark};
+  --bg-secondary: #{$bg-secondary-dark};
+}
+
+body.modal-open {
+  height: 100vh;
+  overflow: hidden;
 }
 
 app-game {
@@ -35,4 +66,8 @@ canvas {
   width: 100%;
   position: absolute;
   top: 0;
+}
+
+select {
+  @include input-select;
 }

@@ -1,0 +1,59 @@
+@import "settings/_colors.scss";
+@import "settings/typography.scss";
+
+header {
+  transition: all 0.5s;
+  z-index: 20;
+  padding: 0.8rem 0;
+  position: sticky;
+  top: 0;
+  height: 4.5rem;
+  width: 100%;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 10%);
+  background: var(--bg-header);
+
+  & .header-wrapper {
+    height: 100%;
+    padding: 0 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & .logo {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      cursor: pointer;
+      @include fs-1;
+
+      & .title {
+        color: var(--fc-light);
+      }
+
+      & .title-primary {
+        color: $fc-primary;
+      }
+    }
+
+    & .options {
+      @include fs-5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      transition: 0.4s ease;
+      cursor: pointer;
+      color: var(--fc-light);
+
+      &:hover {
+        color: var(--fc-dark);
+        transform: translateY(-0.15rem);
+        background: $bg-primary;
+      }
+    }
+  }
+}

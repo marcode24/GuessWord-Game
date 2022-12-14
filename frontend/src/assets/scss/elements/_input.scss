@@ -1,0 +1,33 @@
+@import "settings/_colors.scss";
+@import "settings/_typography.scss";
+
+@mixin input-select {
+  font-size: 1rem;
+  font-weight: normal;
+  max-width: 100%;
+  padding: 0.5rem 0.7rem;
+  border: none;
+  background-color: var(--bg-letter);
+  border-radius: 0.5rem;
+  color: var(--fc-light);
+  @include fs-7;
+  @include fw-500;
+
+  &:active,
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    width: 0;
+    height: 0;
+    margin-top: -2px;
+    border-top: 5px solid #aaa;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+  }
+}

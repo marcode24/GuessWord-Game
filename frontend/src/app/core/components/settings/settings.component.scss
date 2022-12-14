@@ -1,0 +1,83 @@
+@import "elements/_modal.scss";
+@import "settings/_colors.scss";
+@import "settings/_typography.scss";
+
+.modal {
+  @include modal;
+
+  &.open {
+    @include modalOpen;
+  }
+
+  & .modal-content {
+    @include modal-content;
+
+    & .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.8rem 0;
+      border-bottom: 2px solid var(--bg-letter);
+
+      & .title {
+        @include fs-4;
+        @include fw-600;
+        color: var(--fc-light);
+      }
+
+      & .close {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 50%;
+        height: 28px;
+        width: 28px;
+        transition: 0.4s ease;
+        color: var(--fc-light);
+
+        &:hover {
+          color: var(--fc-dark);
+          background: $bg-primary;
+        }
+      }
+    }
+
+    & .body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      & section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        & .title {
+          @include fs-5;
+          @include fw-600;
+          color: var(--fc-light);
+        }
+
+        & .form {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+
+          & .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+
+            & label {
+              @include fs-7;
+              @include fw-500;
+              color: var(--fc-light);
+            }
+          }
+        }
+      }
+    }
+  }
+}

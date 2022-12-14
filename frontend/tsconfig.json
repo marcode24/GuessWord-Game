@@ -25,6 +25,10 @@
     "paths": {
       "@models/*": ["app/core/models/*"],
       "@services/*": ["app/core/services/*"],
+      "@interfaces/*": ["app/core/interfaces/*"],
+      "@components/*": ["app/core/components/*"],
+      "@utils/*": ["app/core/utils/*"],
+      "@shared/*": [ "app/shared/*" ],
     },
     "strictPropertyInitialization": false
   },

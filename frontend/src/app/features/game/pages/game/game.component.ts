@@ -1,37 +1,55 @@
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import * as confetti from 'canvas-confetti';
 
 import { IAnswer } from '@models/answer.model';
 import { IQuestion } from '@models/question.model';
+import { QuestionService } from '@services/question.service';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
   answers: IAnswer[] = []
-  private question: IQuestion = {
-    question: 'What is the capital of France?',
-    answer: 'Paris',
-    topic: {
-      name: 'Geography',
-      description: 'Geography is the study of the lands, the features, the inhabitants, and the phenomena of Earth.',
-      image: 'https://images.unsplash.com/photo-1519680772-8b5f3b5f3b1a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Z2VvcmdheSUyMGJhY2tncm91bmR8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
-      _id: '1',
-      questions: [],
-      createdAt: new Date(),
-    }
-  }
+  question: IQuestion;
   currentAnswer: number = 0;
+  routerSubscription: Subscription;
+  loading: boolean = true;
 
   constructor(
     private renderer2: Renderer2,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private activatedRoute: ActivatedRoute,
+    private questionService: QuestionService,
+    private router: Router
   ) {}
+  ngOnDestroy(): void {
+    this.routerSubscription.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.createAnswers()
+    this.routerSubscription = this.activatedRoute.params.subscribe(({ topicId }) => {
+      if(topicId && topicId.length === 24) {
+        this.getRandomQuestion(topicId);
+      } else {
+        this.router.navigate(['/']);
+      }
+    });
+  }
+
+  private getRandomQuestion(topicId: string): void {
+    this.questionService.getRandomQuestion(topicId).subscribe({
+      next: (question: IQuestion) => {
+        this.question = question;
+        this.createAnswers();
+      },
+      complete: () => {
+        this.loading = false;
+      }
+    });
   }
 
   private surprise(): void {

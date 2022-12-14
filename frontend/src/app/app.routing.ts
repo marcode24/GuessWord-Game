@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { FeaturesRoutingModule } from "./features/features.routing";
+import { GameRoutingModule } from "./features/game/game.routing";
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
   ],
   exports: [
     RouterModule,
-    FeaturesRoutingModule
+    FeaturesRoutingModule,
+    GameRoutingModule,
   ],
 })
 export class AppRoutingModule {}

@@ -9,11 +9,6 @@ const routes: Routes = [
     component: FeaturesComponent,
     loadChildren: () => import('./home/home.routing').then(m => m.HomeRoutingModule),
   },
-  {
-    path: 'game',
-    component: FeaturesComponent,
-    loadChildren: () => import('./game/game.routing').then(m => m.GameRoutingModule),
-  },
 ];
 
 @NgModule({

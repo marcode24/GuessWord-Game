@@ -1,4 +1,5 @@
 @import "settings/_typography.scss";
+@import "settings/_media.scss";
 
 .home-container {
   display: flex;
@@ -14,12 +15,13 @@ section {
   & .title {
     @include fs-3;
     @include fw-800;
-    color: var(--fc-ligth);
+    color: var(--fc-light);
   }
 
   & .topics {
     display: flex;
     gap: 1.8rem;
+    flex-wrap: wrap;
 
     & .topic {
       display: flex;
@@ -27,13 +29,22 @@ section {
       gap: 0.8rem;
       flex-direction: column;
 
+      &:hover {
+        cursor: pointer;
+
+        & picture {
+          transform: translateY(-0.3rem);
+          box-shadow: var(--box-shadow-1);
+        }
+      }
+
       & picture {
-        box-shadow: var(--box-shadow-1);
         width: 80px;
         height: 80px;
         max-width: 80px;
         max-height: 80px;
         border-radius: 50%;
+        transition: 0.4s ease;
 
         & img {
           border-radius: inherit;
@@ -46,41 +57,8 @@ section {
       & .topic-title {
         @include fs-5;
         @include fw-500;
-        color: var(--fc-ligth);
-      }
-    }
-  }
-
-  & .categories {
-    display: flex;
-    gap: 2.8rem;
-
-    & .category {
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 1.2rem;
-
-      & picture {
-        // box-shadow: var(--box-shadow-1);
-        width: 280px;
-        height: 400px;
-        max-width: 280px;
-        max-height: 400px;
-        border-radius: 1.2rem;
-
-        & img {
-          border-radius: inherit;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
-
-      & .category-title {
-        @include fs-4;
-        @include fw-600;
-        color: var(--fc-ligth);
+        color: var(--fc-light);
+        transition: 0.4s ease;
       }
     }
   }

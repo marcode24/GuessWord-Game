@@ -1,4 +1,5 @@
 @import "settings/_typography.scss";
+@import "settings/_media.scss";
 
 .keyboard-wrapper {
   width: 100%;
@@ -13,26 +14,30 @@
 
     & .keyboard-key {
       @include fs-5;
-      @include fw-800;
+      @include fw-700;
       flex: 1 1;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 45px;
-      border: 2px solid #b9b9b9;
+      border: 1px solid var(--border-letter);
       border-radius: 0.5rem;
-      background-color: #fbfcff;
-      color: var(--fc-ligth);
+      background-color: var(--bg-letter);
+      color: var(--fc-light);
       cursor: pointer;
       transition: all 0.2s ease-in-out;
       text-transform: uppercase;
+      @include width-small {
+        @include fs-6;
+        @include fw-600;
+      }
 
       &.action {
         flex: 2 1;
       }
 
       &:hover {
-        background-color: #b9b9b9;
+        background-color: var(--bg-hover-key);
       }
     }
   }

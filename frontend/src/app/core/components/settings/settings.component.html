@@ -1,0 +1,34 @@
+<div class="modal" #modalSettings>
+  <div class="modal-content">
+
+    <div class="header">
+      <span class="title">Configuraciones</span>
+      <div class="close" (click)="closeModal()">
+        <i class="fa fa-times"></i>
+      </div>
+    </div>
+
+    <div class="body">
+      <section>
+        <span class="title">General</span>
+        <form class="form">
+          <div class="form-group">
+            <label for="difficulty">Selecciona tu dificultad</label>
+            <select name="difficulty" id="difficulty">
+              <option value="beginner">Principiante (# intentos)</option>
+              <option value="easy">Fácil (# intentos)</option>
+              <option value="medium">Medio (# intentos)</option>
+              <option value="hard">Difícil (# intentos)</option>
+              <option value="extrem">Extremo (# intentos)</option>
+            </select>
+          </div>
+        </form>
+      </section>
+
+      <section>
+        <span class="title">Cambiar Tema</span>
+        <app-toggle-theme></app-toggle-theme>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,16 +1,18 @@
-<div class="game-container">
-  <section class="top">
-    <span class="question">¿Cuál es la palabra que falta?</span>
-    <span class="topic">cultura general</span>
-  </section>
+<div class="wrapper">
+  <div class="game-container" *ngIf="!loading">
+    <section class="top">
+      <span class="question">{{ question.question }}</span>
+      <span class="topic">{{ question.topic.name }}</span>
+    </section>
 
-  <section class="wordle">
-    <div class="try">
-      <div class="row" *ngFor="let answer of answers">
-        <div *ngFor="let field of answer.letters" class="letter" [class]="field.status"> {{ field.letter }} </div>
+    <section class="wordle">
+      <div class="try">
+        <div class="row" *ngFor="let answer of answers">
+          <div *ngFor="let field of answer.letters" class="letter" [class]="field.status"> {{ field.letter }} </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <app-keyboard (letter)="editAnswer($event)" (enter)="validateAnswer($event)"></app-keyboard>
+    <app-keyboard (letter)="editAnswer($event)" (enter)="validateAnswer($event)"></app-keyboard>
+  </div>
 </div>
