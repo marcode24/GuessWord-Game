@@ -28,6 +28,8 @@
       "@interfaces/*": ["app/core/interfaces/*"],
       "@components/*": ["app/core/components/*"],
       "@utils/*": ["app/core/utils/*"],
+      "@enums/*": ["app/core/enums/*"],
+      "@constants/*": ["app/core/constants/*"],
       "@shared/*": [ "app/shared/*" ],
     },
     "strictPropertyInitialization": false

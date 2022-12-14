@@ -2,7 +2,6 @@
   <div class="game-container" *ngIf="!loading">
     <section class="top">
       <span class="question">{{ question.question }}</span>
-      <span class="topic">{{ question.topic.name }}</span>
     </section>
 
     <section class="wordle">
@@ -12,7 +11,10 @@
         </div>
       </div>
     </section>
-
+    <div class="stats">
+      <span class="topic">{{ question.topic.name }}</span>
+      <span class="tries">Intentos restantes: {{ triesRemaining }}</span>
+    </div>
     <app-keyboard (letter)="editAnswer($event)" (enter)="validateAnswer($event)"></app-keyboard>
   </div>
 </div>

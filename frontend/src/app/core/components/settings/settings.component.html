@@ -14,12 +14,11 @@
         <form class="form">
           <div class="form-group">
             <label for="difficulty">Selecciona tu dificultad</label>
-            <select name="difficulty" id="difficulty">
-              <option value="beginner">Principiante (# intentos)</option>
-              <option value="easy">Fácil (# intentos)</option>
-              <option value="medium">Medio (# intentos)</option>
-              <option value="hard">Difícil (# intentos)</option>
-              <option value="extrem">Extremo (# intentos)</option>
+            <select name="difficulty" id="difficulty" (change)="changeDifficulty($event)">
+              <option [selected]="difficulty.name === difficultySelected" *ngFor="let difficulty of difficulties"
+                [value]="difficulty.name">
+                {{ difficulty.alias }} ( {{ difficulty.maxTries }} intentos )
+              </option>
             </select>
           </div>
         </form>
