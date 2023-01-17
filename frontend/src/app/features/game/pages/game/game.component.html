@@ -1,18 +1,27 @@
 <div class="wrapper">
   <div class="game-container" *ngIf="!loading">
-    <section class="top">
-      <span class="question">{{ question.question }}</span>
-      <span class="topic">{{ question.topic.name }}</span>
+    <section class="header">
+      <div class="back" routerLink="/">
+        <i class="fa fa-arrow-left"></i>
+      </div>
+      <app-toggle-theme></app-toggle-theme>
     </section>
-
-    <section class="wordle">
+    <span class="question">{{ question.question }}</span>
+    <section class="wordle" #wordleWrapper>
       <div class="try">
         <div class="row" *ngFor="let answer of answers">
           <div *ngFor="let field of answer.letters" class="letter" [class]="field.status"> {{ field.letter }} </div>
         </div>
       </div>
     </section>
-
+    <div class="stats">
+      <span class="topic">{{ question.topic.name }}</span>
+      <span class="tries">Intentos restantes: {{ triesRemaining }}</span>
+    </div>
     <app-keyboard (letter)="editAnswer($event)" (enter)="validateAnswer($event)"></app-keyboard>
   </div>
 </div>
+
+<app-modal-status (newGame)="loadNewQuestion($event)" (resetGame)="resetGame($event)"></app-modal-status>
+
+<app-loader *ngIf="loading"></app-loader>

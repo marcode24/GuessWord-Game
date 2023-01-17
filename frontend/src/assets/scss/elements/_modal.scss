@@ -2,7 +2,7 @@
 @import "settings/_media.scss";
 
 @mixin modal {
-  z-index: 200;
+  z-index: 100;
   background-color: rgba(71, 80, 87, 0.4);
   top: 0;
   right: 0;
@@ -21,7 +21,7 @@
 }
 
 @mixin modal-content {
-  min-width: 500px;
+  min-width: 30rem;
   display: flex;
   flex-direction: column;
   border-radius: 1rem;
@@ -32,9 +32,7 @@
   gap: 1.2rem;
 
   @include width-small {
-    border-radius: 0;
-    min-width: 100vw;
-    min-height: 100vh;
     padding: 0.8rem 1rem;
+    margin: 0 1rem;
   }
 }

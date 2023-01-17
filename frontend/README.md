@@ -1,27 +1,72 @@
-# Frontend
+# Word Guess Game Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.2.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.2
 
-## Development server
+## Get started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Requirements
 
-## Code scaffolding
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Git](https://git-scm.com/downloads)
+- [NodeJS](https://nodejs.org/en/)
+- [Angular CLI](https://angular.io/cli)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Clone the repo
 
-## Build
+```shell
+git clone https://github.com/marcode24/GuessWord-Game
+cd GuessWord-Game/frontend
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Install npm packages
 
-## Running unit tests
+Install the `npm` packages described in the `package.json` and verify that it works.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```shell
+npm install
+ng serve -o
+```
 
-## Running end-to-end tests
+Shut it down manually with `Ctrl+C`
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Environments
 
-## Further help
+| Name       | URL                                                                        | PORT |
+| ---------- | -------------------------------------------------------------------------- | ---- |
+| Localhost  | [localhost](http://localhost:4200)                                         | 4200 |
+| Production | [https://wordguess-game.netlify.app/](https://wordguess-game.netlify.app/) |
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Folder Structure
+
+    .
+    ├── src
+    │ ├── app                 # Source code application
+    │ │ ├── core              # Module as a singleton
+    │ │ │ ├── components
+    │ │ │ ├── constants
+    │ │ │ ├── enums
+    │ │ │ ├── interfaces
+    │ │ │ ├── models
+    │ │ │ ├── services
+    │ │ │ └── utils
+    │ │ ├── features          # Module for features which compose the application
+    │ │ └── shared            # Module for components shared between application modules
+    │ │   └── components
+    │ ├── assets              # sass variables, fonts, images, etc.
+    │ │ └── scss              # scss files
+    │ ├── environments        # Config by environment (localhost and production)
+    │ ├── styles              # Global styles
+    │ ├── favicon.ico         # Favicon
+    │ ├── index.html          # Index file
+    │ ├── main.ts             # Main file
+    │ ├── polyfills.ts        # Polyfills file
+    │ ├── styles.scss         # Global styles
+    │ └── test.ts             # Test file
+    ├── .browserslistrc       # Browserslist configuration
+    ├── .editorconfig         # Editor configuration
+    ├── .gitignore            # Git ignore
+    ├── angular.json          # Angular configuration
+    ├── package.json          # Package configuration
+    ├── package-lock.json     # Package lock configuration
+    ├── README.md             # Readme file
+    └── tsconfig.json         # Typescript configuration

@@ -11,6 +11,11 @@
 
   & .modal-content {
     @include modal-content;
+    @include width-small {
+      border-radius: 0;
+      min-width: 100vw;
+      min-height: 100vh;
+    }
 
     & .header {
       display: flex;

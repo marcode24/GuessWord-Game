@@ -1,0 +1,74 @@
+@import "elements/_modal.scss";
+@import "elements/_button.scss";
+@import "settings/_colors.scss";
+@import "settings/_typography.scss";
+
+.modal {
+  @include modal;
+
+  &.open {
+    @include modalOpen;
+  }
+
+  & .modal-content {
+    @include modal-content;
+    min-width: 0;
+    width: 100%;
+
+    & .body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+
+      & figure {
+        width: 180px;
+        height: 180px;
+
+        @include width-small {
+          width: 150px;
+          height: 150px;
+        }
+
+        & img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      & .message {
+        @include fs-4;
+        @include fw-600;
+        color: var(--fc-light);
+        text-align: center;
+        @include width-small {
+          @include fs-5;
+        }
+      }
+
+      & .actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        width: 100%;
+
+        & .btn {
+          @include btn;
+          flex: 1 1;
+
+          &:hover {
+            background: var(--bg-primary-hover);
+          }
+
+          &.btn-primary {
+            @include btn-primary;
+          }
+          &.btn-secondary {
+            @include btn-secondary;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,11 +1,12 @@
-import { Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import * as confetti from 'canvas-confetti';
 
 import { IAnswer } from '@models/answer.model';
 import { IQuestion } from '@models/question.model';
 import { QuestionService } from '@services/question.service';
+import { SettingService } from '@services/setting.service';
+import { GameService } from '../../services/game.service';
 
 @Component({
   selector: 'app-game',
@@ -18,25 +19,25 @@ export class GameComponent implements OnInit, OnDestroy {
   currentAnswer: number = 0;
   routerSubscription: Subscription;
   loading: boolean = true;
+  triesRemaining: number;
+
+  @ViewChild('wordleWrapper') wordleWrapper: ElementRef;
 
   constructor(
-    private renderer2: Renderer2,
-    private elementRef: ElementRef,
     private activatedRoute: ActivatedRoute,
     private questionService: QuestionService,
-    private router: Router
+    private router: Router,
+    private readonly settingService: SettingService,
+    private readonly gameService: GameService,
   ) {}
+
   ngOnDestroy(): void {
     this.routerSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
     this.routerSubscription = this.activatedRoute.params.subscribe(({ topicId }) => {
-      if(topicId && topicId.length === 24) {
-        this.getRandomQuestion(topicId);
-      } else {
-        this.router.navigate(['/']);
-      }
+      topicId && topicId.length === 24 ? this.getRandomQuestion(topicId) : this.router.navigate(['/']);
     });
   }
 
@@ -44,29 +45,21 @@ export class GameComponent implements OnInit, OnDestroy {
     this.questionService.getRandomQuestion(topicId).subscribe({
       next: (question: IQuestion) => {
         this.question = question;
+        this.answers = [];
+        this.triesRemaining = this.settingService.getMaxTries();
+        this.currentAnswer = 0;
         this.createAnswers();
       },
-      complete: () => {
-        this.loading = false;
-      }
+      complete: () =>  this.loading = false,
     });
   }
 
-  private surprise(): void {
-    const canvas = this.renderer2.createElement('canvas');
-    this.renderer2.appendChild(this.elementRef.nativeElement, canvas);
-    const myConfetti = confetti.create(canvas, {
-      resize: true, // will fit all screen sizes
-      useWorker: true // will offload the canvas painting to a web worker
-    });
-    myConfetti({
-      particleCount: 200,
-      spread: 160
-    });
-  }
+  validateAnswer(_: boolean) {
+    if(
+      this.answers[this.currentAnswer].letters.some(answer => answer.letter === '')
+      || this.triesRemaining === 0
+    ) return;
 
-  validateAnswer(validate: boolean) {
-    if(this.answers[this.currentAnswer].letters.some(answer => answer.letter === '')) return;
     // quitar con el map del endpoint
     const answerQuestion = [...this.question.answer].map((letter) => letter.toUpperCase()) as string[];
     this.answers[this.currentAnswer].letters.map((answer, index) => {
@@ -80,11 +73,12 @@ export class GameComponent implements OnInit, OnDestroy {
     });
     if(this.answers[this.currentAnswer].letters.every(answer => answer.status === 'correct')) {
       this.answers[this.currentAnswer].correct = true;
-      this.surprise();
+      this.gameService.openModal(true);
       return
     }
+    this.triesRemaining--;
     this.currentAnswer++;
-    this.createAnswers();
+    this.triesRemaining > 0 ? this.createAnswers() : this.gameService.openModal(false);
   }
 
   createAnswers() {
@@ -93,9 +87,15 @@ export class GameComponent implements OnInit, OnDestroy {
       correct: false
     }
     this.answers.push(newAnswer);
+    this.goBottom();
   }
 
-  editAnswer(letter: string) {
+  private goBottom(): void {
+    if (!this.wordleWrapper) return;
+    this.wordleWrapper.nativeElement.scrollTop = this.wordleWrapper.nativeElement.scrollHeight;
+  }
+
+  editAnswer(letter: string): void {
     const firstIndexEmpty = this.answers[this.currentAnswer].letters.findIndex(answer => answer.letter === '');
     if (letter !== '' && firstIndexEmpty !== -1) {
       this.answers[this.currentAnswer].letters[firstIndexEmpty].letter = letter;
@@ -103,11 +103,22 @@ export class GameComponent implements OnInit, OnDestroy {
     }
     if (letter === '' && firstIndexEmpty > 0) {
       this.answers[this.currentAnswer].letters[firstIndexEmpty - 1].letter = '';
-      return
+      return;
     }
     if(letter === '' && firstIndexEmpty === -1) {
       this.answers[this.currentAnswer].letters[this.answers[this.currentAnswer].letters.length - 1].letter = '';
       return;
     }
+  }
+
+  loadNewQuestion(_: boolean): void {
+    this.getRandomQuestion(this.question.topic._id as string);
+  }
+
+  resetGame(_?: boolean): void {
+    this.answers = [];
+    this.triesRemaining = this.settingService.getMaxTries();
+    this.currentAnswer = 0;
+    this.createAnswers();
   }
 }

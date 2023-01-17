@@ -1,6 +1,11 @@
 import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { SettingService } from '@services/setting.service';
 import { Subscription } from 'rxjs';
+
+import { SettingService } from '@services/setting.service';
+
+import { difficulties } from '@constants/difficulty.constant';
+import { IDifficulty } from '@interfaces/difficulty.interface';
+import { Difficulty } from '@enums/difficulty.enum';
 
 @Component({
   selector: 'app-settings',
@@ -14,6 +19,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
   private modalOpened: boolean = false;
   private modalSubscription: Subscription;
 
+  difficulties: IDifficulty[] = difficulties;
+  difficultySelected: Difficulty = this.settingService.getDifficultySelected();
   constructor(
     private settingService: SettingService
   ) { }
@@ -26,6 +33,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.modalSubscription = this.settingService.openModal
       .subscribe((open: boolean) => open ? this.openModal() : this.closeModal());
   }
+
+  changeDifficulty(difficulty: any): void {
+    const difficultySelected = difficulty.target.value as Difficulty;
+    this.settingService.setDifficulty(difficultySelected);
+  }
+
 
   openModal(): void {
     this.bodyElement.classList.add('modal-open');
