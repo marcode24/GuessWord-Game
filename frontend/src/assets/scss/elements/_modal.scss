@@ -2,7 +2,7 @@
 @import "settings/_media.scss";
 
 @mixin modal {
-  z-index: 200;
+  z-index: 100;
   background-color: rgba(71, 80, 87, 0.4);
   top: 0;
   right: 0;
@@ -33,5 +33,6 @@
 
   @include width-small {
     padding: 0.8rem 1rem;
+    margin: 0 1rem;
   }
 }

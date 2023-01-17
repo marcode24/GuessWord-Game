@@ -15,6 +15,11 @@
     & .keyboard-key {
       @include fs-5;
       @include fw-700;
+      @include width-small {
+        @include fs-6;
+        @include fw-600;
+      }
+      user-select: none;
       flex: 1 1;
       display: flex;
       justify-content: center;
@@ -27,16 +32,13 @@
       cursor: pointer;
       transition: all 0.2s ease-in-out;
       text-transform: uppercase;
-      @include width-small {
-        @include fs-6;
-        @include fw-600;
-      }
 
       &.action {
         flex: 2 1;
       }
 
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: var(--bg-hover-key);
       }
     }

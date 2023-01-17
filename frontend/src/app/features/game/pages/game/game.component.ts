@@ -1,7 +1,6 @@
-import { Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import * as confetti from 'canvas-confetti';
 
 import { IAnswer } from '@models/answer.model';
 import { IQuestion } from '@models/question.model';
@@ -21,15 +20,17 @@ export class GameComponent implements OnInit, OnDestroy {
   routerSubscription: Subscription;
   loading: boolean = true;
   triesRemaining: number;
+
+  @ViewChild('wordleWrapper') wordleWrapper: ElementRef;
+
   constructor(
-    private renderer2: Renderer2,
-    private elementRef: ElementRef,
     private activatedRoute: ActivatedRoute,
     private questionService: QuestionService,
     private router: Router,
     private readonly settingService: SettingService,
     private readonly gameService: GameService,
   ) {}
+
   ngOnDestroy(): void {
     this.routerSubscription.unsubscribe();
   }
@@ -53,13 +54,6 @@ export class GameComponent implements OnInit, OnDestroy {
     });
   }
 
-  private surprise(): void {
-    const canvas = this.renderer2.createElement('canvas');
-    this.renderer2.appendChild(this.elementRef.nativeElement, canvas);
-    const myConfetti = confetti.create(canvas, { resize: true, useWorker: true });
-    myConfetti({ particleCount: 200, spread: 160 });
-  }
-
   validateAnswer(_: boolean) {
     if(
       this.answers[this.currentAnswer].letters.some(answer => answer.letter === '')
@@ -79,7 +73,6 @@ export class GameComponent implements OnInit, OnDestroy {
     });
     if(this.answers[this.currentAnswer].letters.every(answer => answer.status === 'correct')) {
       this.answers[this.currentAnswer].correct = true;
-      this.surprise();
       this.gameService.openModal(true);
       return
     }
@@ -94,6 +87,12 @@ export class GameComponent implements OnInit, OnDestroy {
       correct: false
     }
     this.answers.push(newAnswer);
+    this.goBottom();
+  }
+
+  private goBottom(): void {
+    if (!this.wordleWrapper) return;
+    this.wordleWrapper.nativeElement.scrollTop = this.wordleWrapper.nativeElement.scrollHeight;
   }
 
   editAnswer(letter: string): void {

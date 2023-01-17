@@ -1,5 +1,6 @@
-import { Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import * as confetti from 'canvas-confetti';
 
 import { GameService } from '../../services/game.service';
 
@@ -19,7 +20,9 @@ export class ModalStatusComponent implements OnInit, OnDestroy {
   hasWon: boolean = false;
 
   constructor(
-    private gameService: GameService
+    private gameService: GameService,
+    private renderer2: Renderer2,
+    private elementRef: ElementRef,
   ) { }
   ngOnDestroy(): void {
     this.modalSubscription.unsubscribe();
@@ -34,9 +37,7 @@ export class ModalStatusComponent implements OnInit, OnDestroy {
     this.hasWon = hasWon;
     this.bodyElement.classList.add('modal-open');
     this.modalStatus.nativeElement.classList.add('open');
-    setTimeout(() => {
-      this.modalStatus.nativeElement.style = 'z-index: 201';
-    }, 1800);
+    if(hasWon) this.surprise();
     this.modalOpened = true;
   }
 
@@ -56,6 +57,16 @@ export class ModalStatusComponent implements OnInit, OnDestroy {
   changeGame(): void {
     this.hasWon ? this.newGame.emit(true) : this.resetGame.emit(true);
     this.closeModal();
+  }
+
+  surprise(): void {
+    const canvas = this.renderer2.createElement('canvas');
+    this.renderer2.appendChild(this.elementRef.nativeElement, canvas);
+    const myConfetti = confetti.create(canvas, { resize: true, useWorker: true });
+    myConfetti({ particleCount: 200, spread: 160 });
+    setTimeout(() => {
+      this.renderer2.removeChild(this.elementRef.nativeElement, canvas);
+    }, 3500);
   }
 
 }

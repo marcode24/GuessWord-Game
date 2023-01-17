@@ -7,7 +7,7 @@
       <app-toggle-theme></app-toggle-theme>
     </section>
     <span class="question">{{ question.question }}</span>
-    <section class="wordle">
+    <section class="wordle" #wordleWrapper>
       <div class="try">
         <div class="row" *ngFor="let answer of answers">
           <div *ngFor="let field of answer.letters" class="letter" [class]="field.status"> {{ field.letter }} </div>
@@ -23,3 +23,5 @@
 </div>
 
 <app-modal-status (newGame)="loadNewQuestion($event)" (resetGame)="resetGame($event)"></app-modal-status>
+
+<app-loader *ngIf="loading"></app-loader>
