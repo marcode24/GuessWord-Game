@@ -22,6 +22,7 @@
   </div>
 </div>
 
-<app-modal-status (newGame)="loadNewQuestion($event)" (resetGame)="resetGame($event)"></app-modal-status>
+<app-modal-status *ngIf="question" [moreInfoURL]="question.moreInfoURL" (newGame)="loadNewQuestion($event)"
+  (resetGame)="resetGame($event)"></app-modal-status>
 
 <app-loader *ngIf="loading"></app-loader>

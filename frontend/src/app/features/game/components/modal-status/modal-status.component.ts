@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import * as confetti from 'canvas-confetti';
 
@@ -12,6 +12,7 @@ import { GameService } from '../../services/game.service';
 export class ModalStatusComponent implements OnInit, OnDestroy {
   @Output() resetGame: EventEmitter<boolean> = new EventEmitter();
   @Output() newGame: EventEmitter<boolean> = new EventEmitter();
+  @Input() moreInfoURL: string;
   @ViewChild('modalStatus') modalStatus: ElementRef;
   private bodyElement: HTMLElement = document.body as HTMLBodyElement;
   private modalSubscription: Subscription;
