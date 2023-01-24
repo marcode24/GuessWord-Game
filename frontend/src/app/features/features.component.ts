@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { SettingService } from '@services/setting.service';
+import Storage from '@utils/storage.util';
 
 @Component({
   selector: 'app-features',
   templateUrl: './features.component.html',
   styleUrls: ['./features.component.scss']
 })
-export class FeaturesComponent implements OnInit {
+export class FeaturesComponent implements AfterViewInit {
 
-  constructor() { }
+  constructor(private settingService: SettingService) { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    let showTour = JSON.parse(Storage.getItem('tour'));
+    if ( showTour === null) showTour = true;
+    this.settingService.showModalEmitter.emit(showTour);
   }
 
 }
