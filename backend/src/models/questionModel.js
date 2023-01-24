@@ -18,6 +18,10 @@ const questionSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  moreInfoURL: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = model('Question', questionSchema);

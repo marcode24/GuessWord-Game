@@ -47,6 +47,23 @@
         }
       }
 
+      & .more-info {
+        @include fs-6;
+        @include fw-500;
+        color: $fc-primary;
+        text-align: center;
+        text-decoration: none;
+        transition: 0.4s ease;
+
+        @include width-small {
+          @include fs-7;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
       & .actions {
         display: flex;
         justify-content: center;

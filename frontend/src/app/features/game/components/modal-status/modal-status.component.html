@@ -6,11 +6,12 @@
           [src]="hasWon ? 'https://res.cloudinary.com/dfeujtobk/image/upload/v1671003481/Word%20Guess/win_ld5ann.png' : 'https://res.cloudinary.com/dfeujtobk/image/upload/v1671003524/Word%20Guess/cry_p4ntul.png'"
           alt="status-image">
       </figure>
-
       <span class="message">{{ hasWon ? 'Genial, ¡ganaste!' : 'Oh no perdiste...' }}</span>
+      <a *ngIf="!hasWon" class="more-info" [href]="moreInfoURL" target="__blank">Más información al respecto</a>
       <div class="actions">
-        <button class="btn btn-primary" (click)="changeGame()">{{ hasWon ? 'Juego Nuevo' : 'Volver a intentarlo'
-          }}</button>
+        <button class="btn btn-primary" (click)="changeGame()">
+          {{ hasWon ? 'Juego Nuevo' : 'Volver a intentarlo' }}
+        </button>
         <button class="btn btn-secondary" routerLink="/">Salir</button>
       </div>
     </div>
