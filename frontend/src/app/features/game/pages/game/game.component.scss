@@ -19,6 +19,7 @@
   flex-wrap: wrap;
   z-index: 2;
   padding: $padding-x 1.8rem;
+  user-select: none;
 
   @include width-small {
     padding: $padding-small-x 1rem;

@@ -6,11 +6,13 @@ import { SharedModule } from '@shared/shared.module';
 
 import { HeaderComponent } from './header/header.component';
 import { SettingsComponent } from './settings/settings.component';
+import { TourComponent } from './tour/tour.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    SettingsComponent
+    SettingsComponent,
+    TourComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { SettingsComponent } from './settings/settings.component';
   ],
   exports: [
     HeaderComponent,
-    SettingsComponent
+    SettingsComponent,
+    TourComponent
   ],
 })
 export class ComponentsModule { }

@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { ElementRef, EventEmitter, Injectable, ViewChild } from '@angular/core';
 import { Difficulty } from '@enums/difficulty.enum';
 
 import Storage from '@utils/storage.util';
@@ -8,6 +8,10 @@ import Storage from '@utils/storage.util';
 })
 export class SettingService {
   private bodyElement = document.body as HTMLBodyElement;
+
+  @ViewChild('modalTour') modalTour: ElementRef;
+
+  showModalEmitter: EventEmitter<boolean> = new EventEmitter();
 
   openModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -57,6 +61,21 @@ export class SettingService {
       default:
         return 16;
     }
+  }
+
+  showTour(show: boolean): void {
+    if(!show)  {
+      this.bodyElement.classList.remove('modal-open');
+    } else {
+      this.bodyElement.classList.add('modal-open')
+    }
+    this.showModalEmitter.emit(show);
+  }
+
+  changeTourVisibilityLocal (): void {
+    Storage.saveLocalStorage('tour', false);
+    this.showModalEmitter.emit(false);
+    this.bodyElement.classList.remove('modal-open');
   }
 
 }

@@ -1,0 +1,41 @@
+<div class="modal" #modalTour>
+  <div class="modal-content">
+    <div class="body">
+      <span class="welcome">Bienvenido!</span>
+      <div class="progress-wrap">
+        <div class="progress" #progress></div>
+        <div #step *ngFor="let steps of stepsTour; let $i = index" class="step" [ngClass]="$i === 0 ? 'active': ''">
+          {{ $i + 1 }}</div>
+      </div>
+      <div class="slider">
+        <div #pages class="pages">
+          <div #page class="page slide-page" #slidePage>
+            <img [src]="firstItemStepTour.img" alt="tour-image" loading="lazy">
+            <span class="description">
+              {{firstItemStepTour.description}}
+            </span>
+          </div>
+          <div #page class="page" *ngFor="let step of itemStepsTour">
+            <img [src]="step.img" alt="tour-image" loading="lazy">
+            <span class="description">
+              {{step.description}}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="buttons">
+        <button [disabled]="currentStep === 1" disabled (click)="prevStep()" class="btn btn-primary btn-outline"
+          disabled>
+          <i class="fa fa-arrow-left"></i> Prev</button>
+        <button *ngIf="!final" (click)="nextStep()" class="btn btn-primary">
+          Next
+          <i class="fa fa-arrow-right"></i>
+        </button>
+        <button *ngIf="final" (click)="closeTour()" class="btn btn-primary">
+          Finish
+          <i class="fa fa-check"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

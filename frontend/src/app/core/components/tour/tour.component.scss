@@ -1,0 +1,175 @@
+@import "settings/_colors.scss";
+@import "settings/_typography.scss";
+@import "elements/_modal.scss";
+@import "elements/_button.scss";
+
+.modal {
+  @include modal;
+
+  &.open {
+    @include modalOpen;
+  }
+
+  & .modal-content {
+    @include modal-content;
+    min-width: 34rem;
+    @include width-small {
+      border-radius: 0;
+      min-width: 100vw;
+      min-height: 100vh;
+    }
+  }
+
+  & .body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.4rem;
+
+    & .welcome {
+      @include fs-2;
+      color: $fc-primary;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    & .progress-wrap {
+      z-index: 201;
+      max-width: 90%;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+
+      &::before {
+        content: "";
+        width: 100%;
+        height: 4px;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        z-index: -1;
+        transition: 0.3s ease-in-out;
+        background-color: #e6e6e6;
+      }
+
+      & .progress {
+        width: 0;
+        height: 4px;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        z-index: -1;
+        transition: 0.3s ease-in-out;
+        background-color: $fc-primary;
+      }
+
+      & .step {
+        width: 40px;
+        height: 40px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #333;
+        background-color: #fff;
+        border: 3px solid #e6e6e6;
+        border-radius: 50%;
+        transition: 0.3s ease-in-out;
+
+        &.active {
+          border-color: $fc-primary;
+        }
+      }
+    }
+    & .slider {
+      width: 100%;
+      overflow: hidden;
+
+      & .pages {
+        display: flex;
+
+        & .page {
+          width: 100%;
+          min-width: 100%;
+          transition: margin-left 0.4s ease-in-out;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+
+          & img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 0.2rem;
+          }
+
+          & .description {
+            @include fs-4;
+            @include fw-500;
+            color: var(--fc-light);
+
+            @include width-small {
+              @include fs-5;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.btn {
+  @include btn;
+  flex: 1 1;
+
+  &:hover {
+    background: var(--bg-primary-hover);
+  }
+
+  &.btn-primary {
+    @include btn-primary;
+  }
+  &.btn-secondary {
+    @include btn-secondary;
+  }
+}
+
+.btn:disabled {
+  color: #666;
+  background-color: #e6e6e6;
+  cursor: not-allowed;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 480px) {
+  .page img {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .page .description {
+    font-size: 17px;
+  }
+
+  .modal-content {
+    border-radius: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    justify-content: center;
+  }
+
+  .progress-wrap {
+    width: 92%;
+  }
+}
